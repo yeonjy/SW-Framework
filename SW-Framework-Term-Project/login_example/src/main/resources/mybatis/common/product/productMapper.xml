@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tukorea.common.product.dao.ProductDao">
+
+    <select id="selectProductInfo" parameterType="Integer" resultType="java.util.HashMap">
+        SELECT
+            productId,
+            userId,
+            title,
+            price,
+            imageUrl,
+            contents,
+            tradeStatus
+        FROM
+            `Product`
+        WHERE
+            productId = #{productId}
+    </select>
+
+    <update id="updateProfileImage" parameterType="java.util.HashMap">
+        UPDATE
+            Product
+        SET
+            imageName = #{imageName},
+            imageUrl = #{imageUrl}
+        WHERE
+            productId = #{productId}
+    </update>
+
+    <update id="deleteProduct" parameterType="Integer">
+        UPDATE
+            Product
+        SET
+            status = 'DELETED'
+        WHERE
+            productId = #{productId}
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+

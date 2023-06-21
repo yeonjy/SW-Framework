@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tukorea.common.home.dao.HomeDao">
+
+    <select id="selectProducts" resultType="com.tukorea.common.home.dto.HomeDto">
+        SELECT
+            productId,
+            title,
+            price,
+            tradeStatus
+        FROM
+            Product
+        WHERE
+            `status` = 'ACTIVE'
+    </select>
+
+    <select id="selectNotices" resultType="com.tukorea.common.home.dto.NoticeDto">
+        SELECT
+            noticeId,
+            userId,
+            content,
+            createdAt,
+            updatedAt
+        FROM
+            `Notice`
+        WHERE
+            `status` = 'ACTIVE'
+    </select>
+
+    <update id="deleteNotice" parameterType="Integer">
+        UPDATE
+            `Notice`
+        SET
+            status = 'DELETED'
+        WHERE
+            noticeId = #{noticeId}
+    </update>
+
+    <select id="selectNoticeInfo" resultType="java.util.HashMap" parameterType="Integer">
+        SELECT
+            noticeId,
+            userId,
+            content,
+            createdAt,
+            updatedAt
+        FROM
+            `Notice`
+        WHERE
+            noticeId = #{noticeId}
+    </select>
+
+</mapper>
